@@ -1,0 +1,32 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+}
+a {
+    color: var(--el-color-primary);
+}
+code {
+    border-radius: 2px;
+    padding: 2px 4px;
+    background-color: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
+}
+.logo {
+    margin-top: 10px;
+    height: 28px;
+}
+#app {
+    text-align: center;
+    color: var(--el-text-color-primary);
+}
+.el-sub-menu__title {
+    font-size:var(--el-font-size-medium)!important;
+}
+.el-menu-item{
+  font-size:var(--el-font-size-medium)!important;
+}
+.el-dropdown-link:focus {
+    outline: none;
+}

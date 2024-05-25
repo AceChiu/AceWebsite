@@ -1,0 +1,63 @@
+lintAndTest:
+  stage: test
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: ['']
+  script:
+    - echo $DOCKER_AUTH_CONFIG > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --use-new-run 
+      --snapshotMode=redo
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/LintAndTestDockerfile" --no-push
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: ['']
+  script:
+    - DATE=`date '+%Y%m%d.%H%M%S'`
+    - echo $DOCKER_AUTH_CONFIG > /kaniko/.docker/config.json
+    - cat /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --use-new-run 
+      --snapshotMode=redo
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/Dockerfile"
+      --destination "it-docker.deltaww.com/${CI_PROJECT_NAME}:$DATE-${CI_COMMIT_SHA:0:8}"
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+buildStage:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: ['']
+  script:
+    - echo $DOCKER_AUTH_CONFIG > /kaniko/.docker/config.json
+    - cat /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --use-new-run 
+      --snapshotMode=redo
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/BuildStageDockerfile"
+      --destination "it-docker.deltaww.com/${CI_PROJECT_NAME}-builder"
+  only:
+    changes:
+      - package.json
+testRunner:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: ['']
+  script:
+    - echo $DOCKER_AUTH_CONFIG > /kaniko/.docker/config.json
+    - cat /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --use-new-run 
+      --snapshotMode=redo
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/TestRunnerDockerfile"
+      --destination "it-docker.deltaww.com/${CI_PROJECT_NAME}-test-runner"
+  when: manual
