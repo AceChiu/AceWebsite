@@ -45,8 +45,8 @@ onMounted(() => {
 </script>
 <style lang="scss">
 .dropdown-local {
-  color: #fff !important;
-  font-size: 14px;
+  color: gray !important;
+  font-size: 18px !important;
   cursor: pointer;
   display: flex;
   align-items: center;

@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import eslintPlugin from 'vite-plugin-eslint' 
+import eslintPlugin from 'vite-plugin-eslint'
 import Unocss from 'unocss/vite'
 import {
   presetAttributify,
@@ -35,7 +35,7 @@ export default ({ mode }) => {
     },
     plugins: [
       vue(),
-      eslintPlugin({ cache: false }), 
+      eslintPlugin({ cache: false }),
       Components({
         // allow auto load markdown components under `./src/components/`
         extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.scss', 'vue', 'md'],
@@ -79,7 +79,7 @@ export default ({ mode }) => {
     },
     server: {
       host: true,
-      port: 3000,
+      port: 3000
     }
   })
 }

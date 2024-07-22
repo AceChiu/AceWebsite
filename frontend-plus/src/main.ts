@@ -5,6 +5,7 @@ import App from './App.vue'
 import { authAxiosInstance } from './util/axiosInstance'
 import pinia from './store/store'
 import i18n from './config/i18n'
+import vue3GoogleLogin from 'vue3-google-login'
 import './styles/index.scss'
 import 'uno.css'
 
@@ -14,13 +15,13 @@ import 'element-plus/theme-chalk/src/message.scss'
 
 // import all element css, uncommented next line
 import 'element-plus/dist/index.css'
-import gAuthPlugin from 'vue3-google-oauth2';
 
 const app = createApp(App)
-const gauthClientId = "768834812579-ivi0oopbkqe05cg6t41p83t7gteekut6.apps.googleusercontent.com";
-app.use(gAuthPlugin, { clientId: gauthClientId, scope: 'email', prompt: 'consent', fetch_basic_profile: false })
 app.config.globalProperties.$authAxios = { ...authAxiosInstance }
 app.use(pinia)
 app.use(router)
-app.mount('#app')
 app.use(i18n)
+app.use(vue3GoogleLogin, {
+    clientId: '429767660564-5hum32kmibduum3ep3ia83ec3p49tgnn.apps.googleusercontent.com'
+})
+app.mount('#app')

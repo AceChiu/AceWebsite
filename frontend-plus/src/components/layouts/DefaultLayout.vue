@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-container class="layout">
-      <el-aside class="aside" width="auto">
+      <!-- <el-aside class="aside" width="auto">
         <DesktopAsideMenu></DesktopAsideMenu>
         <MobileAsideMenu></MobileAsideMenu>
-      </el-aside>
+      </el-aside> -->
       <el-container class="layout-container">
         <el-header class="header">
           <DefaultHeader />
@@ -24,16 +24,16 @@
 </template>
 <script setup lang="ts">
 import DefaultHeader from './DefaultHeader.vue'
-import DesktopAsideMenu from '~/components/layouts/DesktopAsideMenu.vue'
-import MobileAsideMenu from '~/components/layouts/MobileAsideMenu.vue'
+// import DesktopAsideMenu from '~/components/layouts/DesktopAsideMenu.vue'
+// import MobileAsideMenu from '~/components/layouts/MobileAsideMenu.vue'
 // import NavigationHeader from '~/components/layouts/NavigationHeader.vue'
 </script>
 <style lang="scss" scoped>
 .layout {
-  height: 100vh;
+  height: 200vh;
 }
 .layout-container {
-  height: 100vh;
+  height: 200vh;
   &__main {
     overflow-y: auto;
   }
@@ -51,8 +51,22 @@ import MobileAsideMenu from '~/components/layouts/MobileAsideMenu.vue'
   color: #fff;
 }
 .main {
-  background-color: $delta-light-gray;
+  // background-color: black;
+  position: relative;
   padding: 32px 24px;
+  &::before {
+    //背景透明度設定
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/logo.jpg');
+    background-size: cover;
+    opacity: 0.6;
+    z-index: -1;
+  }
 }
 .footer {
   background-color: $delta-silver-white;

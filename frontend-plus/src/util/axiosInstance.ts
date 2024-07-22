@@ -16,8 +16,10 @@ const axiosInstance = (
   instance.interceptors.request.use(
     (config) => {
       // config.headers['Accept-Language'] = store.getters.getLanguage
-      config.headers.Authorization =
-        'Bearer ' + Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)
+      if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
+        config.headers.Authorization =
+          'Bearer ' + Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)
+      }
       config.headers['Content-Type'] = 'application/json'
       // store.commit(types.LOADING, true)
       return config

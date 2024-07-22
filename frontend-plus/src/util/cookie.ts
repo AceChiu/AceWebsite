@@ -1,4 +1,4 @@
-function setCookie (cookieName: string, value: string, expireDays: number) {
+function setCookie(cookieName: string, value: string, expireDays: number) {
   const expirationDate = new Date()
   expirationDate.setTime(expirationDate.getTime() + expireDays)
 
@@ -11,7 +11,7 @@ function setCookie (cookieName: string, value: string, expireDays: number) {
     process.env.VUE_APP_DOMAIN
 }
 
-function getCookie (name: string) {
+function getCookie(name: string) {
   let arr
   const reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
   if ((arr = document.cookie.match(reg))) {
@@ -27,11 +27,7 @@ const delCookie = (name: string) => {
   const cval = getCookie(name)
   if (cval != null) {
     document.cookie =
-      name +
-      '=;expires=' +
-      exp.toUTCString() +
-      ';path=/;domain=' +
-      process.env.VUE_APP_DOMAIN
+      name + '=;expires=' + exp.toUTCString() + ';path=/;domain=' + process.env.VUE_APP_DOMAIN
   }
 }
 
